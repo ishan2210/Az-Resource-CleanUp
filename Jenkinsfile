@@ -1,13 +1,15 @@
 pipeline {
     agent any
-    environment {
-        AZURE_CLIENT_ID       = credentials('AZURE_CLIENT_ID')
-        AZURE_CLIENT_SECRET   = credentials('AZURE_CLIENT_SECRET')
-        AZURE_TENANT_ID       = credentials('AZURE_TENANT_ID')
+       environment {
+        // Reference Jenkins Credentials (set in the Credentials manager)
+        AZURE_TENANT_ID = credentials('AZURE_TENANT_ID')
         AZURE_SUBSCRIPTION_ID = credentials('AZURE_SUBSCRIPTION_ID')
+        AZURE_CLIENT_ID = credentials('AZURE_CLIENT_ID')
+        AZURE_CLIENT_SECRET = credentials('AZURE_CLIENT_SECRET')
         GRAPH_CLIENT_ID       = credentials('GRAPH_CLIENT_ID')
         GRAPH_CLIENT_SECRET   = credentials('GRAPH_CLIENT_SECRET')
     }
+
     triggers {
         cron('H H(2-4) * * *') // Runs daily between 2–4 AM
     }
